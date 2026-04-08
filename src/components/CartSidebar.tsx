@@ -75,7 +75,10 @@ const CartSidebar = () => {
               <span>Total:</span>
               <span className="text-primary">${totalPrice.toFixed(2)}</span>
             </div>
-            <button className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-full hover:opacity-90 transition-opacity">
+            <button
+              onClick={() => { setIsCartOpen(false); navigate("/checkout"); }}
+              className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-full hover:opacity-90 transition-opacity"
+            >
               Realizar Pedido
             </button>
             <button
