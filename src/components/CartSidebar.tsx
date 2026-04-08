@@ -1,8 +1,10 @@
 import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const CartSidebar = () => {
   const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
+  const navigate = useNavigate();
 
   if (!isCartOpen) return null;
 
@@ -73,7 +75,10 @@ const CartSidebar = () => {
               <span>Total:</span>
               <span className="text-primary">${totalPrice.toFixed(2)}</span>
             </div>
-            <button className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-full hover:opacity-90 transition-opacity">
+            <button
+              onClick={() => { setIsCartOpen(false); navigate("/checkout"); }}
+              className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-full hover:opacity-90 transition-opacity"
+            >
               Realizar Pedido
             </button>
             <button
