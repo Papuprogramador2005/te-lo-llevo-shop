@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CartProvider } from "@/context/CartContext";
 import StoreHeader from "@/components/StoreHeader";
 import HeroBanner from "@/components/HeroBanner";
 import CategoryShowcase from "@/components/CategoryShowcase";
