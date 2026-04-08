@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const CartSidebar = () => {
   const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
+  const navigate = useNavigate();
 
   if (!isCartOpen) return null;
 
