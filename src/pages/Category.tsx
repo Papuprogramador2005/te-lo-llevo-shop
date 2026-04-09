@@ -6,7 +6,7 @@ import ProductCard from "@/components/ProductCard";
 import CartSidebar from "@/components/CartSidebar";
 import StoreFooter from "@/components/StoreFooter";
 import { products, categories } from "@/data/products";
-import { ArrowLeft, LayoutGrid, Apple, Carrot, Package, BookOpen } from "lucide-react";
+import { ArrowLeft, LayoutGrid, Apple, Carrot, Package, BookOpen, Coffee } from "lucide-react";
 
 const categoryMeta: Record<string, { icon: React.ReactNode; emoji: string; description: string; gradient: string }> = {
   Frutas: {
@@ -27,10 +27,16 @@ const categoryMeta: Record<string, { icon: React.ReactNode; emoji: string; descr
     description: "Productos básicos de la despensa para tu hogar.",
     gradient: "from-amber-500/20 to-yellow-500/20",
   },
+  Bebidas: {
+    icon: <Coffee size={28} />,
+    emoji: "☕",
+    description: "Refrescos, jugos, cafés y todo tipo de bebidas para tu día.",
+    gradient: "from-cyan-500/20 to-teal-500/20",
+  },
   Librería: {
     icon: <BookOpen size={28} />,
     emoji: "📓",
-    description: "Material escolar y de oficina de la mejor calidad.",
+    description: "Material escolar, oficina, arte, mochilas y más.",
     gradient: "from-blue-500/20 to-indigo-500/20",
   },
 };

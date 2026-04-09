@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { Apple, Carrot, Package, BookOpen, ArrowRight } from "lucide-react";
+import { Apple, Carrot, Package, BookOpen, Coffee, ArrowRight } from "lucide-react";
 import { products } from "@/data/products";
 
 const categoryData = [
   { name: "Frutas", icon: <Apple size={24} />, emoji: "🍎🍌🍊🍇🍓🍍", color: "from-red-500/10 to-orange-500/10", border: "border-red-200" },
   { name: "Verduras", icon: <Carrot size={24} />, emoji: "🍅🥕🥦🥬🧅🥔", color: "from-green-500/10 to-emerald-500/10", border: "border-green-200" },
   { name: "Abarrotes", icon: <Package size={24} />, emoji: "🍚🫘🫒🧂🥛🥚", color: "from-amber-500/10 to-yellow-500/10", border: "border-amber-200" },
-  { name: "Librería", icon: <BookOpen size={24} />, emoji: "📓✏️🖊️🖍️🧴✂️", color: "from-blue-500/10 to-indigo-500/10", border: "border-blue-200" },
+  { name: "Bebidas", icon: <Coffee size={24} />, emoji: "💧🥤🧃☕🍵🍫", color: "from-cyan-500/10 to-teal-500/10", border: "border-cyan-200" },
+  { name: "Librería", icon: <BookOpen size={24} />, emoji: "📓✏️🖊️🎒🧮🎨", color: "from-blue-500/10 to-indigo-500/10", border: "border-blue-200" },
 ];
 
 const CategoryShowcase = () => {
