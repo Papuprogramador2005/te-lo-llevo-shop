@@ -164,8 +164,8 @@ const Checkout = () => {
           </Link>
 
           {!user && (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6 flex items-center justify-between flex-wrap gap-3">
-              <p className="text-sm text-yellow-800">Debes iniciar sesión para completar tu pedido.</p>
+            <div className="bg-accent/50 border border-accent rounded-xl p-4 mb-6 flex items-center justify-between flex-wrap gap-3">
+              <p className="text-sm text-accent-foreground">Debes iniciar sesión para completar tu pedido.</p>
               <Link to="/auth" className="text-sm font-medium text-primary hover:underline">
                 Iniciar sesión →
               </Link>
