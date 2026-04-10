@@ -1,5 +1,7 @@
-import { ShoppingCart, Search, Menu } from "lucide-react";
+import { ShoppingCart, Search, Menu, User, LogOut, Package, Shield } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 import logoTL from "@/assets/logo-tl.png";
 import { useState } from "react";
 
@@ -10,14 +12,16 @@ interface StoreHeaderProps {
 
 const StoreHeader = ({ searchQuery, onSearchChange }: StoreHeaderProps) => {
   const { totalItems, setIsCartOpen } = useCart();
+  const { user, role, signOut } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img src={logoTL} alt="Te Lo Llevo" width={48} height={48} className="w-10 h-10 md:w-12 md:h-12" />
             <div className="hidden sm:block">
               <h1 className="font-heading font-bold text-lg md:text-xl text-foreground leading-tight">
@@ -25,7 +29,7 @@ const StoreHeader = ({ searchQuery, onSearchChange }: StoreHeaderProps) => {
               </h1>
               <p className="text-xs text-muted-foreground">Tu tienda de confianza</p>
             </div>
-          </div>
+          </Link>
 
           {/* Search Bar - Desktop */}
           <div className="hidden md:flex flex-1 max-w-md mx-8">
@@ -42,10 +46,31 @@ const StoreHeader = ({ searchQuery, onSearchChange }: StoreHeaderProps) => {
           </div>
 
           {/* Nav Links - Desktop */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+          <nav className="hidden md:flex items-center gap-4 text-sm font-medium text-muted-foreground">
             <a href="#productos" className="hover:text-primary transition-colors">Productos</a>
             <a href="#categorias" className="hover:text-primary transition-colors">Categorías</a>
-            <a href="#contacto" className="hover:text-primary transition-colors">Contacto</a>
+            {user && (
+              <Link to="/mis-pedidos" className="hover:text-primary transition-colors flex items-center gap-1">
+                <Package size={16} /> Mis Pedidos
+              </Link>
+            )}
+            {(role === "employee" || role === "admin") && (
+              <Link to="/empleado" className="hover:text-primary transition-colors flex items-center gap-1">
+                <Shield size={16} /> Panel
+              </Link>
+            )}
+            {user ? (
+              <button
+                onClick={() => { signOut(); }}
+                className="hover:text-destructive transition-colors flex items-center gap-1"
+              >
+                <LogOut size={16} /> Salir
+              </button>
+            ) : (
+              <Link to="/auth" className="hover:text-primary transition-colors flex items-center gap-1">
+                <User size={16} /> Entrar
+              </Link>
+            )}
           </nav>
 
           {/* Cart & Mobile Menu */}
@@ -70,7 +95,7 @@ const StoreHeader = ({ searchQuery, onSearchChange }: StoreHeaderProps) => {
           </div>
         </div>
 
-        {/* Mobile Search & Menu */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden pb-4 space-y-3 animate-fade-in">
             <div className="relative">
@@ -86,7 +111,25 @@ const StoreHeader = ({ searchQuery, onSearchChange }: StoreHeaderProps) => {
             <nav className="flex flex-col gap-2 text-sm font-medium text-muted-foreground">
               <a href="#productos" className="py-2 px-3 rounded-lg hover:bg-muted transition-colors">Productos</a>
               <a href="#categorias" className="py-2 px-3 rounded-lg hover:bg-muted transition-colors">Categorías</a>
-              <a href="#contacto" className="py-2 px-3 rounded-lg hover:bg-muted transition-colors">Contacto</a>
+              {user && (
+                <Link to="/mis-pedidos" className="py-2 px-3 rounded-lg hover:bg-muted transition-colors flex items-center gap-2">
+                  <Package size={16} /> Mis Pedidos
+                </Link>
+              )}
+              {(role === "employee" || role === "admin") && (
+                <Link to="/empleado" className="py-2 px-3 rounded-lg hover:bg-muted transition-colors flex items-center gap-2">
+                  <Shield size={16} /> Panel Empleado
+                </Link>
+              )}
+              {user ? (
+                <button onClick={() => signOut()} className="py-2 px-3 rounded-lg hover:bg-muted transition-colors flex items-center gap-2 text-left">
+                  <LogOut size={16} /> Cerrar sesión
+                </button>
+              ) : (
+                <Link to="/auth" className="py-2 px-3 rounded-lg hover:bg-muted transition-colors flex items-center gap-2">
+                  <User size={16} /> Iniciar sesión
+                </Link>
+              )}
             </nav>
           </div>
         )}
