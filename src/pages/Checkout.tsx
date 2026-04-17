@@ -8,6 +8,16 @@ import StoreFooter from "@/components/StoreFooter";
 import { ArrowLeft, CreditCard, Banknote, Smartphone, Truck, MapPin, CheckCircle2, ShoppingBag, Loader2 } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
+import { z } from "zod";
+import { rateLimit, rateLimitMessage } from "@/lib/rateLimit";
+
+const checkoutSchema = z.object({
+  name: z.string().trim().min(2, "Nombre muy corto").max(100),
+  phone: z.string().trim().min(7, "Teléfono inválido").max(20),
+  email: z.string().trim().email("Correo inválido").max(255).optional().or(z.literal("")),
+  address: z.string().trim().max(300).optional(),
+  notes: z.string().trim().max(500).optional(),
+});
 
 const paymentMethods = [
   { id: "efectivo", label: "Efectivo contra entrega", icon: <Banknote size={20} />, description: "Paga al recibir tu pedido" },
@@ -39,18 +49,22 @@ const Checkout = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.phone) {
-      toast.error("Por favor completa los campos obligatorios");
-      return;
-    }
-    if (delivery === "domicilio" && !form.address) {
-      toast.error("Por favor ingresa tu dirección de envío");
-      return;
-    }
 
     if (!user) {
       toast.error("Debes iniciar sesión para realizar un pedido");
       navigate("/auth");
+      return;
+    }
+
+    if (!rateLimit(`checkout-${user.id}`, 3, 60_000)) {
+      toast.error(rateLimitMessage(60));
+      return;
+    }
+
+    const parsed = checkoutSchema.safeParse(form);
+    if (!parsed.success) return toast.error(parsed.error.errors[0].message);
+    if (delivery === "domicilio" && !parsed.data.address) {
+      toast.error("Por favor ingresa tu dirección de envío");
       return;
     }
 
