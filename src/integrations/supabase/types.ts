@@ -55,9 +55,12 @@ export type Database = {
       orders: {
         Row: {
           address: string | null
+          cancellation_reason: string | null
+          cancelled_at: string | null
           created_at: string
           delivery_method: string
           id: string
+          is_paused: boolean
           notes: string | null
           payment_method: string
           status: Database["public"]["Enums"]["order_status"]
@@ -67,9 +70,12 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
           created_at?: string
           delivery_method?: string
           id?: string
+          is_paused?: boolean
           notes?: string | null
           payment_method?: string
           status?: Database["public"]["Enums"]["order_status"]
@@ -79,9 +85,12 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
           created_at?: string
           delivery_method?: string
           id?: string
+          is_paused?: boolean
           notes?: string | null
           payment_method?: string
           status?: Database["public"]["Enums"]["order_status"]
@@ -153,6 +162,44 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          order_id: string
+          rating: number
+          user_id: string
+          user_name: string | null
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          order_id: string
+          rating: number
+          user_id: string
+          user_name?: string | null
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          order_id?: string
+          rating?: number
+          user_id?: string
+          user_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       suppliers: {
         Row: {
           category: string
@@ -213,7 +260,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "employee" | "user"
-      order_status: "pendiente" | "despachando" | "enviado" | "entregado"
+      order_status:
+        | "pendiente"
+        | "despachando"
+        | "enviado"
+        | "entregado"
+        | "cancelado"
+        | "editando"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -342,7 +395,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "employee", "user"],
-      order_status: ["pendiente", "despachando", "enviado", "entregado"],
+      order_status: [
+        "pendiente",
+        "despachando",
+        "enviado",
+        "entregado",
+        "cancelado",
+        "editando",
+      ],
     },
   },
 } as const
