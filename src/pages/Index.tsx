@@ -2,6 +2,7 @@ import { useState } from "react";
 import StoreHeader from "@/components/StoreHeader";
 import HeroBanner from "@/components/HeroBanner";
 import CategoryShowcase from "@/components/CategoryShowcase";
+import CombosShowcase from "@/components/CombosShowcase";
 import CategoryFilter from "@/components/CategoryFilter";
 import ProductGrid from "@/components/ProductGrid";
 import CartSidebar from "@/components/CartSidebar";
@@ -17,6 +18,7 @@ const Index = () => {
       <main className="flex-1">
         <HeroBanner />
         <CategoryShowcase />
+        <CombosShowcase />
         <CategoryFilter selected={selectedCategory} onSelect={setSelectedCategory} />
         <ProductGrid category={selectedCategory} searchQuery={searchQuery} />
       </main>

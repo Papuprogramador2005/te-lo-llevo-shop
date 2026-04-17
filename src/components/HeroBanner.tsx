@@ -5,7 +5,7 @@ const HeroBanner = () => {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <img src={heroBanner} alt="Productos frescos" width={1920} height={800} className="w-full h-full object-cover" />
+        <img src={heroBanner} alt="Productos frescos a domicilio" width={1920} height={800} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/50 to-transparent" />
       </div>
       <div className="relative container mx-auto px-4 py-16 md:py-28">
@@ -14,10 +14,10 @@ const HeroBanner = () => {
             🚚 Envío a domicilio
           </span>
           <h2 className="font-heading text-3xl md:text-5xl font-extrabold text-card mb-4 leading-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Productos frescos directo a tu puerta
+            Lo pides <span className="text-secondary">"Te lo llevo"</span>
           </h2>
           <p className="text-card/80 text-base md:text-lg mb-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            Abarrotes, frutas, verduras y artículos de librería. ¡Todo lo que necesitas en un solo lugar!
+            Restaurantes, heladerías, panadería, farmacia, abarrotes, combos y más. Todo lo que necesitas en un solo lugar.
           </p>
           <a
             href="#productos"
