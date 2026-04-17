@@ -1,12 +1,17 @@
 import { categories } from "@/data/products";
-import { Apple, Carrot, Package, BookOpen, LayoutGrid, Coffee } from "lucide-react";
+import { Apple, Carrot, Package, BookOpen, LayoutGrid, Coffee, UtensilsCrossed, IceCream, Croissant, Pill, Gift } from "lucide-react";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   Todos: <LayoutGrid size={18} />,
+  Combos: <Gift size={18} />,
   Frutas: <Apple size={18} />,
   Verduras: <Carrot size={18} />,
   Abarrotes: <Package size={18} />,
   Bebidas: <Coffee size={18} />,
+  Restaurantes: <UtensilsCrossed size={18} />,
+  Heladerías: <IceCream size={18} />,
+  Panadería: <Croissant size={18} />,
+  Farmacia: <Pill size={18} />,
   Librería: <BookOpen size={18} />,
 };
 

@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
-import { Apple, Carrot, Package, BookOpen, Coffee, ArrowRight } from "lucide-react";
+import { Apple, Carrot, Package, BookOpen, Coffee, ArrowRight, UtensilsCrossed, IceCream, Croissant, Pill, Gift } from "lucide-react";
 import { products } from "@/data/products";
 
 const categoryData = [
+  { name: "Combos", icon: <Gift size={24} />, emoji: "🍳🍛🧼🍜☕👨‍👩‍👧", color: "from-pink-500/10 to-rose-500/10", border: "border-pink-200" },
+  { name: "Restaurantes", icon: <UtensilsCrossed size={24} />, emoji: "🍔🍕🌮🌯🍣🥗", color: "from-red-500/10 to-orange-500/10", border: "border-red-200" },
+  { name: "Heladerías", icon: <IceCream size={24} />, emoji: "🍨🍦🍡🍮🥤", color: "from-pink-400/10 to-purple-400/10", border: "border-pink-200" },
+  { name: "Panadería", icon: <Croissant size={24} />, emoji: "🥖🥐🍞🍰🍩🍪", color: "from-amber-500/10 to-yellow-500/10", border: "border-amber-200" },
+  { name: "Farmacia", icon: <Pill size={24} />, emoji: "💊🧴🩹🌡️😷", color: "from-emerald-500/10 to-teal-500/10", border: "border-emerald-200" },
   { name: "Frutas", icon: <Apple size={24} />, emoji: "🍎🍌🍊🍇🍓🍍", color: "from-red-500/10 to-orange-500/10", border: "border-red-200" },
   { name: "Verduras", icon: <Carrot size={24} />, emoji: "🍅🥕🥦🥬🧅🥔", color: "from-green-500/10 to-emerald-500/10", border: "border-green-200" },
   { name: "Abarrotes", icon: <Package size={24} />, emoji: "🍚🫘🫒🧂🥛🥚", color: "from-amber-500/10 to-yellow-500/10", border: "border-amber-200" },
@@ -17,10 +22,10 @@ const CategoryShowcase = () => {
         Explora por Categoría
       </h2>
       <p className="text-muted-foreground text-center mb-8">
-        Encuentra todo lo que necesitas organizado para ti
+        Lo pides "Te lo llevo": comida, abarrotes, farmacia y mucho más
       </p>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5">
         {categoryData.map((cat) => {
           const count = products.filter(p => p.category === cat.name).length;
           return (
